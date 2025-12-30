@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Client</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg1:#0f1724; --bg2:#0b1220; --accent:#4da3ff; --muted:#9aa4b2; --glass:rgba(255,255,255,0.04);
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0; font-family:'Inter',system-ui,Arial,sans-serif; background:linear-gradient(135deg,var(--bg1),var(--bg2)); color:#e6f0ff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+        }
+        .container{max-width:1100px;margin:40px auto;padding:28px}
+
+        .header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .brand{display:flex;align-items:center;gap:14px}
+        .brand img{width:64px;height:auto;border-radius:8px}
+        .title{font-size:22px;font-weight:700;margin:0}
+        .subtitle{color:var(--muted);font-weight:500;font-size:14px}
+
+        .cta{background:linear-gradient(90deg,var(--accent),#6ec3ff);padding:12px 20px;border-radius:10px;color:#042032;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(77,163,255,0.14);transition:transform .15s ease,box-shadow .15s ease}
+        .cta:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(77,163,255,0.18)}
+
+        .stats{display:flex;gap:12px;margin-top:18px}
+        .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px 14px;border-radius:10px;font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:8px}
+
+        .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;margin-top:28px;align-items:center}
+        .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+        .hero h1{font-size:36px;margin:0 0 8px 0;color:#fff}
+        .hero p{margin:0;color:var(--muted);line-height:1.5}
+
+        .showcase{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;position:relative;display:flex;flex-direction:column;gap:14px;align-items:stretch}
+        .video-frame{background:#000;border-radius:10px;overflow:hidden;position:relative;padding-top:56.25%}
+        .video-frame video{position:absolute;top:0;left:0;width:100%;height:100%;display:block;background:#000}
+
+        .thumb-list{display:flex;gap:8px;flex-wrap:wrap}
+        .thumb{flex:1 1 calc(50% - 8px);min-width:110px;background:#071125;border-radius:8px;padding:8px;color:var(--muted);display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.03);transition:transform .12s,border-color .12s}
+        .thumb:hover{transform:translateY(-4px);border-color:rgba(77,163,255,0.2)}
+        .thumb .label{font-weight:600;color:#dff1ff}
+        .thumb.active{outline:2px solid rgba(77,163,255,0.18);box-shadow:0 8px 26px rgba(6,18,36,0.6);transform:translateY(-6px)}
+
+        .footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+
+        @media (max-width:880px){.hero{grid-template-columns:1fr}.brand img{width:48px}.video-frame{padding-top:56.25%}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand">
+                <img src="trustpilot.png" alt="Trustpilot 4.5 rating">
+                <div>
+                    <div class="title">Ruby Client</div>
+                    <div class="subtitle">The best Minecraft client for DonutSMP — Open-source & community-driven</div>
+                </div>
+            </div>
+            <a class="cta" id="download" href="https://github.com/alphaprogram32bit/RubyClient/releases/download/release/RubyClient.jar">Download • v1.0</a>
+        </header>
+
+        <section class="hero">
+            <div class="hero-card">
+                <h1>Fast. Reliable. Designed for DonutSMP</h1>
+                <p>Ruby Client is an open-source Minecraft client built for performance and ease-of-use. Join 12.6k+ users and explore over 10,000 bases discovered by the community.</p>
+                <div class="stats" aria-hidden="true">
+                    <div class="stat"><strong style="color:#fff">Open-source</strong></div>
+                    <div class="stat"><strong style="color:#fff">12.6k Downloads</strong></div>
+                    <div class="stat"><strong style="color:#fff">10,000+ Bases</strong></div>
+                </div>
+            </div>
+
+            <div class="showcase hero-card">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <strong>Client Showcase</strong>
+                    <span class="subtitle">Pick your launcher to see quick setup</span>
+                </div>
+
+                <div class="video-frame" id="videoFrame">
+                    <video id="player" controls preload="metadata">
+                        <source src="video1.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <div class="thumb-list" role="tablist" aria-label="Launcher examples">
+                    <button class="thumb active" data-src="video1.mp4" aria-pressed="true"><span class="label">Minecraft Launcher</span></button>
+                    <button class="thumb" data-src="video2.mp4" aria-pressed="false"><span class="label">MultiMC</span></button>
+                    <button class="thumb" data-src="video3.mp4" aria-pressed="false"><span class="label">Prism</span></button>
+                    <button class="thumb" data-src="video4.mp4" aria-pressed="false"><span class="label">CurseForge</span></button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Built with ❤️ — <a href="https://github.com/alphaprogram32bit/RubyClient" style="color:var(--accent)">Source on GitHub</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.thumb');
+        const player = document.getElementById('player');
+
+        // set initial source from active thumb (first)
+        document.addEventListener('DOMContentLoaded', () => {
+          const active = document.querySelector('.thumb.active');
+          if (active) {
+            player.querySelector('source').src = active.getAttribute('data-src');
+            player.load();
+          }
+        });
+
+        // click handler
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed','true');
+            const src = btn.getAttribute('data-src');
+            // swap source
+            const source = player.querySelector('source');
+            const current = source.getAttribute('src');
+            if (current && current.endsWith(src)) {
+              if (player.paused) player.play(); else player.pause();
+              return;
+            }
+            source.src = src;
+            player.pause();
+            player.load();
+            player.play().catch(()=>{});
+          });
+        });
+
+        // keyboard accessibility for thumbnails
+        buttons.forEach((b, idx) => {
+          b.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') buttons[(idx+1)%buttons.length].focus();
+            if (e.key === 'ArrowLeft') buttons[(idx-1+buttons.length)%buttons.length].focus();
+          });
+        });
+    </script>
+</body>
+</html>
